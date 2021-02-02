@@ -39,6 +39,9 @@ public class User : MonoBehaviour
         StartCoroutine(_userData.DownloadUserData(result =>
         {
             _userData = result;
+            Debug.Log("download complete");
+            Debug.Log(result.firstName);
+            Debug.Log(_userData.firstName);
         }));
     }
 
@@ -80,6 +83,11 @@ public class User : MonoBehaviour
     public List<KeyCount> GetGamesPlayed()
     {
         return _userData.gamesPlayed;
+    }
+
+    public string GetFirstName()
+    {
+        return _userData.firstName;
     }
 
     public string GetFullName()

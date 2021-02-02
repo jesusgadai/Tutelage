@@ -6,37 +6,18 @@ using TMPro;
 
 public class DevelopmentSkills : MonoBehaviour
 {
-    public GameObject listPair;
+    public TMP_Text title;
+    public Image image;
 
-    void OnEnable()
+    public void SetSkill(DevelopmentSkillObject devObject)
     {
-        if (User.instance != null)
-        {
-            if (User.instance.GetSkills().Count > 0)
-                DestroyAllChildren();
-
-            foreach (KeyCount keyCount in User.instance.GetSkills())
-            {
-                GameObject newListPair = Instantiate(listPair, Vector3.zero, Quaternion.identity, transform);
-                newListPair.transform.Find("Game").GetComponent<TMP_Text>().text = keyCount.name;
-                newListPair.transform.Find("Amount").GetComponent<TMP_Text>().text = keyCount.count.ToString();
-            }
-        }
-
-        StartCoroutine(RefreshLayout());
+        this.title.text = devObject.title;
+        this.image.sprite = devObject.image;
     }
+}
 
-    void DestroyAllChildren()
-    {
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
-    }
-
-    IEnumerator RefreshLayout()
-    {
-        yield return new WaitForFixedUpdate();
-
-        yield return new WaitForFixedUpdate();
-        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform.parent.parent);
-    }
+[System.Flags]
+public enum DevSkillsEnum
+{
+    selfControlStrategies, characterBuilding, communicationSkills, resolvingConflict, confidence, integrity, empathyForPeers, hygiene, playSkills, problemSolving, developingFriendship, selfLove
 }

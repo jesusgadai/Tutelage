@@ -11,4 +11,9 @@ public class ResetScrollRect : MonoBehaviour
     {
         scrollRect.verticalNormalizedPosition = 1;
     }
+
+    public void ResetScrollRectButton()
+    {
+        scrollRect.verticalNormalizedPosition = 1;
+    }
 }

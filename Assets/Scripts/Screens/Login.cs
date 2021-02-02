@@ -14,10 +14,14 @@ public class Login : MonoBehaviour
     public UnityEvent onLogin;
 
     public bool testBuild = false;
+    public GameObject testBuildBanner;
 
     void Start()
     {
         _user = new UserData();
+
+        if (testBuild)
+            testBuildBanner.SetActive(true);
     }
 
     public void LogIn()

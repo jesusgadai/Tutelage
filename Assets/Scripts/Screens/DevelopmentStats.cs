@@ -20,7 +20,7 @@ public class DevelopmentStats : MonoBehaviour
 
     private void OnEnable()
     {
-        if (User.instance != null)
+        if (User.instance != null && User.instance.GetSkills() != null)
         {
             firstLastName.text = User.instance.GetFullName();
             tokensEarned.text = User.instance.GetTokensEarned().ToString();
@@ -30,6 +30,8 @@ public class DevelopmentStats : MonoBehaviour
             PopulateList(developmentSkills, skillsListPair, User.instance.GetSkills());
             PopulateList(gamesPlayed, gamesListPair, User.instance.GetGamesPlayed());
         }
+
+        StartCoroutine(RefreshLayout());
     }
 
     void PopulateList(Transform parent, GameObject prefab, List<KeyCount> keyPairs)
@@ -43,8 +45,6 @@ public class DevelopmentStats : MonoBehaviour
             newListPair.transform.Find("Game").GetComponent<TMP_Text>().text = keyCount.name;
             newListPair.transform.Find("Amount").GetComponent<TMP_Text>().text = keyCount.count.ToString();
         }
-
-        StartCoroutine(RefreshLayout());
     }
 
     void DestroyAllChildren(Transform transform)

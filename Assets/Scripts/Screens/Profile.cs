@@ -14,7 +14,7 @@ public class Profile : MonoBehaviour
     {
         if (User.instance != null)
         {
-            firstLastName.text = User.instance.GetFullName();
+            firstLastName.text = User.instance.GetFullName().Equals("") ? "Blank User" : User.instance.GetFullName();
             tokens.text = User.instance.GetTokens().ToString();
             userImage.sprite = User.instance.GetUserImage();
             userImage.color = Color.white;

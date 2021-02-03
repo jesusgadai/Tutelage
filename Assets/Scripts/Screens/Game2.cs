@@ -15,6 +15,8 @@ public class Game2 : MonoBehaviour
     public Image userImage;
     public TMP_Text congratulationsText;
     public TMP_Text tokensEarned;
+    public Button nextGameButton;
+    Game game;
 
     string userFirstName;
 
@@ -30,6 +32,19 @@ public class Game2 : MonoBehaviour
 
     public void SetGame2Screen(Game game)
     {
+        this.game = game;
+        if (game.nextGame == null)
+        {
+            nextGameButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            nextGameButton.gameObject.SetActive(true);
+            nextGameButton.onClick.AddListener(() =>
+            {
+                SetGame2Screen(game.nextGame);
+            });
+        }
         banner.sprite = game.banner;
         mechanics.text = game.mechanics;
         devSkills = game.devSkills;
@@ -43,6 +58,19 @@ public class Game2 : MonoBehaviour
     public void RefreshLayoutBtn()
     {
         StartCoroutine(RefreshLayout());
+    }
+
+    public void TestWin()
+    {
+        if (User.instance != null)
+        {
+            User user = User.instance;
+            user.AddDevelopmentSkill(GetSelectedSkillsEnum());
+
+            user.AddPlayedGame(game.title);
+
+            user.AddTokens(game.tokensToEarn);
+        }
     }
 
     IEnumerator RefreshLayout()
@@ -87,6 +115,23 @@ public class Game2 : MonoBehaviour
             if (((int)devSkills & layer) != 0)
             {
                 selectedElements.Add(System.Enum.GetValues(typeof(DevSkillsEnum)).GetValue(i).ToString());
+            }
+        }
+
+        return selectedElements;
+    }
+
+    public List<DevSkillsEnum> GetSelectedSkillsEnum()
+    {
+
+        List<DevSkillsEnum> selectedElements = new List<DevSkillsEnum>();
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(DevSkillsEnum)).Length; i++)
+        {
+            int layer = 1 << i;
+            if (((int)devSkills & layer) != 0)
+            {
+                selectedElements.Add((DevSkillsEnum)System.Enum.GetValues(typeof(DevSkillsEnum)).GetValue(i));
             }
         }
 

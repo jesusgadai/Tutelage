@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -23,6 +22,17 @@ public class UserData
     public int tokens;
     public int tokensEarned;
     public string timeStamp;
+
+
+    string JSONPath()
+    {
+        string path = "resources";
+#if UNITY_ANDROID
+        path = ".resources";
+#endif
+        path = Path.Combine(Application.persistentDataPath, path);
+        return Path.Combine(path, "userData.json");
+    }
 
     public string Stringify()
     {
@@ -58,7 +68,7 @@ public class UserData
         }
     }
 
-    public IEnumerator UploadData(bool login, System.Action<bool> callback = null)
+    public IEnumerator UploadData(bool login, bool stayLoggedIn, System.Action<bool> callback = null)
     {
         timeStamp = System.DateTime.Now.ToString();
 
@@ -87,6 +97,53 @@ public class UserData
                     callback.Invoke(request.downloadHandler.text != "{}");
                 }
             }
+        }
+    }
+
+    public static UserData Compare(UserData saved, UserData downloaded)
+    {
+        if (saved == null && downloaded == null)
+            return null;
+        if (saved == null || saved.timeStamp.Equals(""))
+            return downloaded;
+        if (downloaded == null || downloaded.timeStamp.Equals(""))
+            return saved;
+
+        if (System.DateTime.Parse(saved.timeStamp) > System.DateTime.Parse(downloaded.timeStamp))
+            return saved;
+
+        return downloaded;
+    }
+
+    public bool JSONexists()
+    {
+        return File.Exists(JSONPath());
+    }
+
+    public UserData ReadLocalJSON()
+    {
+        string playerJSONPath = JSONPath();
+
+        if (File.Exists(playerJSONPath))
+            return UserData.Parse(File.ReadAllText(playerJSONPath));
+
+        return null;
+    }
+
+    public void SaveLocalJSON(bool stayLoggedIn)
+    {
+        string playerJSONPath = JSONPath();
+
+        if (stayLoggedIn && !username.Equals(""))
+        {
+            string userData = this.Stringify();
+            File.WriteAllText(playerJSONPath, userData);
+            Debug.Log(playerJSONPath);
+        }
+        else
+        {
+            if (File.Exists(playerJSONPath))
+                File.Delete(playerJSONPath);
         }
     }
 

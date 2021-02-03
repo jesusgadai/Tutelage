@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
 public class Login : MonoBehaviour
 {
     UserData _user;
 
+    public Toggle stayLoggedin;
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
     public TMP_Text validation;
@@ -28,15 +30,34 @@ public class Login : MonoBehaviour
     {
         _user.username = usernameInput.text;
         _user.password = passwordInput.text;
+        bool stayLoggedInValue = stayLoggedin.isOn;
 
-        StartCoroutine(_user.UploadData(true, result =>
+        ProcessLogIn(stayLoggedInValue);
+    }
+
+    UserData ProcessLogIn(bool stayLoggedInValue)
+    {
+        StartCoroutine(_user.UploadData(true, stayLoggedInValue, result =>
         {
             Debug.Log(result);
             if (result || testBuild)
             {
                 if (!testBuild && User.instance != null)
                 {
-                    User.instance.DownloadUserData(_user.username);
+                    User.instance.DownloadUserData(_user.username, true);
+                }
+                else
+                {
+                    User.instance._userData = new UserData();
+                    UserData _userData = User.instance._userData;
+                    _userData.firstName = "Test";
+                    _userData.lastName = "User";
+                    _userData.emailAddress = "testUser@email.com";
+                    _userData.parentsEmail = "testUserParent@email.com";
+                    _userData.tokens = 101;
+                    _userData.tokensEarned = 202;
+                    _userData.skillsPlayed = new List<KeyCount>();
+                    _userData.gamesPlayed = new List<KeyCount>();
                 }
 
                 StartCoroutine(CheckFirstLogin());
@@ -45,7 +66,11 @@ public class Login : MonoBehaviour
             {
                 validation.gameObject.SetActive(true);
             }
+
+            User.instance.UpdateStayLogin(stayLoggedInValue);
         }));
+
+        return User.instance._userData;
     }
 
     IEnumerator CheckFirstLogin()

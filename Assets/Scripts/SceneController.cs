@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour
 {
     public Slider loadPercentage;
 
-    int waitForSeconds;
+    int waitForSeconds = 0;
 
     // #region Singleton
     // public static SceneController instance;
@@ -23,19 +23,6 @@ public class SceneController : MonoBehaviour
     //     instance = this;
     // }
     // #endregion 
-
-    void Start()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            LoadScene(1);
-            waitForSeconds = 1;
-        }
-        else
-        {
-            waitForSeconds = 0;
-        }
-    }
 
     public void LoadScene(int sceneIndex)
     {

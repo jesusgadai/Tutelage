@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameCategory
 {
     public Sprite banner;
+    public Sprite icon;
     public string title;
     public string description;
     [EnumFlagsAttribute]
@@ -21,8 +22,14 @@ public class Game
     public string title;
     public int tokensToEarn;
     public string mechanics;
+    public Game nextGame;
     [EnumFlagsAttribute]
     public DevSkillsEnum devSkills;
+
+    [HideInInspector]
+    public string categoryTitle;
+    [HideInInspector]
+    public Sprite categoryIcon;
 }
 
 [System.Flags]

@@ -11,6 +11,7 @@ public class GameCategoryScreen : MonoBehaviour
     public TMP_Text description;
     public Transform requirementsParent;
     public GameObject requirementPrefab;
+    public Button gameStart;
 
     [EnumFlagsAttribute]
     RequirementsEnum requirements;
@@ -64,6 +65,10 @@ public class GameCategoryScreen : MonoBehaviour
             {
                 GameList firstGameList = gamesParent.GetChild(0).GetComponent<GameList>();
                 firstGameList.SetGameList(index, game);
+                gameStart.onClick.AddListener(() =>
+                {
+                    firstGameList.play.onClick.Invoke();
+                });
                 index++;
                 continue;
             }

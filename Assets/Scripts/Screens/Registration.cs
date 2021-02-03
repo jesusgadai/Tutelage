@@ -199,7 +199,7 @@ public class Registration : MonoBehaviour
         userData.password = password.GetText();
         userData.language = "English";
 
-        StartCoroutine(userData.UploadData(false, result =>
+        StartCoroutine(userData.UploadData(false, false, result =>
         {
             if (result)
                 if (onRegister != null)

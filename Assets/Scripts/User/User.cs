@@ -22,26 +22,63 @@ public class User : MonoBehaviour
             Debug.LogWarning("[User.cs] - Multiple User(s) found!");
             Destroy(gameObject);
         }
+
+        _localData = new LocalUserData();
     }
     #endregion 
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateStayLogin(bool value)
     {
-        _userData = new UserData();
-        _localData = new LocalUserData();
+        _localData.UpdateStayLogin(value);
     }
 
-    public void DownloadUserData(string username)
+    public void AddDevelopmentSkill(List<DevSkillsEnum> devtSkillsEnums)
+    {
+        foreach (DevSkillsEnum devSkillEnum in devtSkillsEnums)
+        {
+            string developmentSkill = DevSkills.EnumToString(devSkillEnum);
+            KeyCount skillPlayed = _userData.skillsPlayed.Find(r => r.name.Equals(developmentSkill));
+
+            if (skillPlayed != null)
+                skillPlayed.count++;
+            else
+                _userData.skillsPlayed.Add(new KeyCount(developmentSkill, 1));
+        }
+
+        UpdateUserData();
+    }
+
+    public UserData ReadLocalJSON()
+    {
+        return _userData.ReadLocalJSON();
+    }
+
+    public void StayLoggedIn(bool value)
+    {
+        _localData.stayLoggedIn = value;
+    }
+
+    public void AddPlayedGame(string gameTitle)
+    {
+        KeyCount gamePlayed = _userData.gamesPlayed.Find(r => r.name.Equals(gameTitle));
+
+        if (gamePlayed != null)
+            gamePlayed.count++;
+        else
+            _userData.gamesPlayed.Add(new KeyCount(gameTitle, 1));
+    }
+
+    public void DownloadUserData(string username, bool updateLocalJSON)
     {
         _userData.username = username;
 
         StartCoroutine(_userData.DownloadUserData(result =>
         {
-            _userData = result;
-            Debug.Log("download complete");
-            Debug.Log(result.firstName);
-            Debug.Log(_userData.firstName);
+            if (result != null)
+                _userData = result;
+
+            if (updateLocalJSON)
+                _userData.SaveLocalJSON(_localData.stayLoggedIn);
         }));
     }
 
@@ -51,6 +88,8 @@ public class User : MonoBehaviour
         {
             Debug.Log("[User.cs] - Update result: " + result);
         }));
+
+        _userData.SaveLocalJSON(_localData.stayLoggedIn);
     }
 
     public void LogOut()
@@ -62,6 +101,17 @@ public class User : MonoBehaviour
     public void UpdateUserImage()
     {
         _localData.ReadUserImage();
+    }
+
+    public bool CheckStayLoggedIn()
+    {
+        bool stayLoggedIn = _localData.stayLoggedIn;
+        bool JSONexists = _userData.JSONexists();
+
+        if (stayLoggedIn && JSONexists)
+            return true;
+
+        return false;
     }
 
     public bool CheckFirstLogin()
@@ -114,7 +164,9 @@ public class User : MonoBehaviour
     public void AddTokens(int tokens)
     {
         _userData.tokens += tokens;
-        _userData.tokensEarned += tokens;
+
+        if (tokens > 0)
+            _userData.tokensEarned += tokens;
         UpdateUserData();
     }
 

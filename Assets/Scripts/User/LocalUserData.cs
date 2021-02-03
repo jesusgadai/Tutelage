@@ -7,6 +7,7 @@ public class LocalUserData
 {
     public string playerImagePath;
     public Sprite playerImage;
+    public bool stayLoggedIn;
 
     bool privateOldUser;
     public bool oldUser
@@ -35,6 +36,7 @@ public class LocalUserData
         ReadUserImage();
 
         oldUser = PlayerPrefs.GetInt(Keys.oldUser) > 0 ? true : false;
+        stayLoggedIn = PlayerPrefs.GetInt(Keys.stayLoggedIn) > 0 ? true : false;
     }
 
     public Texture2D ReadUserImage()
@@ -51,5 +53,11 @@ public class LocalUserData
         }
 
         return null;
+    }
+
+    public void UpdateStayLogin(bool value)
+    {
+        stayLoggedIn = value;
+        PlayerPrefs.SetInt(Keys.stayLoggedIn, value ? 1 : 0);
     }
 }

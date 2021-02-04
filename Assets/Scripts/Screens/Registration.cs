@@ -19,13 +19,21 @@ public class Registration : MonoBehaviour
 
     public UnityEvent onRegister;
 
+    bool validationFailed;
+
     public void ValidateInput()
     {
-        bool validationFailed = false;
-        validationFailed = ValidateDetails();
-        validationFailed = ValidateUsername();
-        validationFailed = ValidateEmails();
-        validationFailed = ValidatePassword();
+        ValidateDetails();
+        ValidateUsername();
+        ValidateEmails();
+        ValidatePassword();
+
+        StartCoroutine(WaitForValidation());
+    }
+
+    IEnumerator WaitForValidation()
+    {
+        yield return new WaitForSeconds(1f);
 
         if (validationFailed)
             Debug.Log("Validation failed");
@@ -35,7 +43,6 @@ public class Registration : MonoBehaviour
 
     bool ValidateDetails()
     {
-        bool validationFailed = false;
         if (firstName.GetText().Equals(""))
         {
             firstName.ValidationFailed("* Field is required");
@@ -72,7 +79,6 @@ public class Registration : MonoBehaviour
 
     bool ValidateUsername()
     {
-        bool validationFailed = false;
         string uname = username.GetText();
         if (uname.Equals(""))
         {
@@ -102,8 +108,6 @@ public class Registration : MonoBehaviour
 
     bool ValidateEmails()
     {
-        bool validationFailed = false;
-
         //emailAddress
         if (emailAddress.GetText().Equals(""))
         {
@@ -162,7 +166,6 @@ public class Registration : MonoBehaviour
 
     bool ValidatePassword()
     {
-        bool validationFailed = false;
         if (password.GetText().Equals(""))
         {
             password.ValidationFailed("* Field is required");
@@ -202,8 +205,29 @@ public class Registration : MonoBehaviour
         StartCoroutine(userData.UploadData(false, false, result =>
         {
             if (result)
-                if (onRegister != null)
-                    onRegister.Invoke();
+            {
+                User.instance.DeleteAllLocalData();
+                ProcessLogIn(userData, false);
+            }
         }));
+    }
+
+    UserData ProcessLogIn(UserData user, bool stayLoggedInValue)
+    {
+        User.instance.DownloadUserData(user.username, true);
+
+        StartCoroutine(CheckFirstLogin());
+
+        return User.instance._userData;
+    }
+
+    IEnumerator CheckFirstLogin()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        User.instance.CheckFirstLogin();
+
+        if (onRegister != null)
+            onRegister.Invoke();
     }
 }

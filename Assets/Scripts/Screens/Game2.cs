@@ -16,6 +16,8 @@ public class Game2 : MonoBehaviour
     public TMP_Text congratulationsText;
     public TMP_Text tokensEarned;
     public Button nextGameButton;
+    public GameObject preGameNavigation;
+    public GameObject preGameNavigationReading;
     Game game;
 
     string userFirstName;
@@ -51,8 +53,17 @@ public class Game2 : MonoBehaviour
         congratulationsText.text = "CONGRATULATIONS " + userFirstName + " YOU WON " + game.title + "!";
         tokensEarned.text = "YOU JUST EARNED\n<color=#ff8426>" + "+" + game.tokensToEarn.ToString() + " TOKENS</color>";
 
+        preGameNavigation.SetActive(!game.readingGame);
+        preGameNavigationReading.SetActive(game.readingGame);
+
         PopulateDevelopmentSkills();
         StartCoroutine(RefreshLayout());
+    }
+
+    public void ResetGame2Screen()
+    {
+        preGameNavigation.SetActive(!game.readingGame);
+        preGameNavigationReading.SetActive(game.readingGame);
     }
 
     public void RefreshLayoutBtn()

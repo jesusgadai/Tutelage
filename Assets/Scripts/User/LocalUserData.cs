@@ -39,6 +39,21 @@ public class LocalUserData
         stayLoggedIn = PlayerPrefs.GetInt(Keys.stayLoggedIn) > 0 ? true : false;
     }
 
+    public void DeleteAllLocalData()
+    {
+        PlayerPrefs.DeleteAll();
+
+        string path = "resources";
+#if UNITY_ANDROID
+        path = ".resources";
+#endif
+        path = Path.Combine(Application.persistentDataPath, path);
+        string playerJSONPath = Path.Combine(path, "userData.json");
+
+        if (File.Exists(playerJSONPath))
+            File.Delete(playerJSONPath);
+    }
+
     public Texture2D ReadUserImage()
     {
         // Debug.Log("Reading file: " + playerImagePath);

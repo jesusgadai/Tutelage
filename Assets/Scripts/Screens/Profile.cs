@@ -7,6 +7,7 @@ using TMPro;
 public class Profile : MonoBehaviour
 {
     public TMP_Text firstLastName;
+    public TMP_Text gamesPlayed;
     public TMP_Text tokens;
     public Image userImage;
 
@@ -14,9 +15,11 @@ public class Profile : MonoBehaviour
     {
         if (User.instance != null)
         {
-            firstLastName.text = User.instance.GetFullName().Equals("") ? "Blank User" : User.instance.GetFullName();
-            tokens.text = User.instance.GetTokens().ToString();
-            userImage.sprite = User.instance.GetUserImage();
+            User user = User.instance;
+            firstLastName.text = user.GetFullName().Equals("") ? "Blank User" : user.GetFullName();
+            gamesPlayed.text = user.GetTotalGamesPlayed().ToString();
+            tokens.text = user.GetTokens().ToString();
+            userImage.sprite = user.GetUserImage();
             userImage.color = Color.white;
         }
     }

@@ -22,6 +22,7 @@ public class Game
     public string title;
     public int tokensToEarn;
     public string mechanics;
+    public bool readingGame;
     public Game nextGame;
     [EnumFlagsAttribute]
     public DevSkillsEnum devSkills;

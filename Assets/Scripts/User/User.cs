@@ -75,7 +75,10 @@ public class User : MonoBehaviour
         StartCoroutine(_userData.DownloadUserData(result =>
         {
             if (result != null)
+            {
                 _userData = result;
+                Debug.Log("[User.cs] - Downloaded User: " + result.username);
+            }
 
             if (updateLocalJSON)
                 _userData.SaveLocalJSON(_localData.stayLoggedIn);
@@ -90,6 +93,11 @@ public class User : MonoBehaviour
         }));
 
         _userData.SaveLocalJSON(_localData.stayLoggedIn);
+    }
+
+    public void DeleteAllLocalData()
+    {
+        _localData.DeleteAllLocalData();
     }
 
     public void LogOut()
@@ -148,6 +156,17 @@ public class User : MonoBehaviour
     public Sprite GetUserImage()
     {
         return _localData.playerImage;
+    }
+
+    public int GetTotalGamesPlayed()
+    {
+        int total = 0;
+        foreach (KeyCount gamePlayed in _userData.gamesPlayed)
+        {
+            total += gamePlayed.count;
+        }
+
+        return total;
     }
 
     public int GetTokens()

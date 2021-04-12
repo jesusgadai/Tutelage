@@ -24,37 +24,37 @@ MonoBehaviour:
       Nec Erat
     requirements: -1
     games:
-    - banner: {fileID: 21300000, guid: 705291c3a957ea94c8bb7ec2d4ff1d3d, type: 3}
-      smallBanner: {fileID: 21300000, guid: 90513a06c972a8844ab8f85adbac753d, type: 3}
-      title: Reading
+    - title: Reading
+      mechanics: Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Maximus,
+        Nulla Ut Commodo Sagittis, Sapien Dui Mattis Dui, Non Pulvinar Lorem Felis
+        Nec Erat
       tokensToEarn: 3
-      mechanics: Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Maximus,
-        Nulla Ut Commodo Sagittis, Sapien Dui Mattis Dui, Non Pulvinar Lorem Felis
-        Nec Erat
-      readingGame: 1
-      devSkills: 257
-      categoryTitle: The Super-Hero
-      categoryIcon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
-    - banner: {fileID: 21300000, guid: 83c3546e2e7010b438da1fac666a4f6b, type: 3}
+      banner: {fileID: 21300000, guid: 705291c3a957ea94c8bb7ec2d4ff1d3d, type: 3}
       smallBanner: {fileID: 21300000, guid: 90513a06c972a8844ab8f85adbac753d, type: 3}
-      title: Pinball
-      tokensToEarn: 5
-      mechanics: Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Maximus,
-        Nulla Ut Commodo Sagittis, Sapien Dui Mattis Dui, Non Pulvinar Lorem Felis
-        Nec Erat
-      readingGame: 0
-      devSkills: 513
+      devSkills: 257
+      readingGame: 1
       categoryTitle: The Super-Hero
       categoryIcon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
-    - banner: {fileID: 21300000, guid: 969c6bf73b88e534795645adec5b7ca0, type: 3}
-      smallBanner: {fileID: 21300000, guid: a117461ba70692b4d86ad0cc2cbd2060, type: 3}
-      title: Super Hero
-      tokensToEarn: 10
+    - title: Pinball
       mechanics: Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Maximus,
         Nulla Ut Commodo Sagittis, Sapien Dui Mattis Dui, Non Pulvinar Lorem Felis
         Nec Erat
+      tokensToEarn: 5
+      banner: {fileID: 21300000, guid: 83c3546e2e7010b438da1fac666a4f6b, type: 3}
+      smallBanner: {fileID: 21300000, guid: 90513a06c972a8844ab8f85adbac753d, type: 3}
+      devSkills: 513
       readingGame: 0
+      categoryTitle: The Super-Hero
+      categoryIcon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
+    - title: Super Hero
+      mechanics: Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Nunc Maximus,
+        Nulla Ut Commodo Sagittis, Sapien Dui Mattis Dui, Non Pulvinar Lorem Felis
+        Nec Erat
+      tokensToEarn: 10
+      banner: {fileID: 21300000, guid: 969c6bf73b88e534795645adec5b7ca0, type: 3}
+      smallBanner: {fileID: 21300000, guid: a117461ba70692b4d86ad0cc2cbd2060, type: 3}
       devSkills: -1
+      readingGame: 0
       categoryTitle: The Super-Hero
       categoryIcon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
   status: 1

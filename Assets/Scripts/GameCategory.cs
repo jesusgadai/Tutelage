@@ -17,16 +17,16 @@ public class GameCategory
 [System.Serializable]
 public class Game
 {
+    public string title;
+    public string mechanics;
+    public int tokensToEarn;
     public Sprite banner;
     public Sprite smallBanner;
-    public string title;
-    public int tokensToEarn;
-    public string mechanics;
-    public bool readingGame;
-    public Game nextGame;
     [EnumFlagsAttribute]
     public DevSkillsEnum devSkills;
+    public bool readingGame;
 
+    public Game nextGame;
     [HideInInspector]
     public string categoryTitle;
     [HideInInspector]

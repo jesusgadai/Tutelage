@@ -66,6 +66,8 @@ public class User : MonoBehaviour
             gamePlayed.count++;
         else
             _userData.gamesPlayed.Add(new KeyCount(gameTitle, 1));
+
+        UpdateUserData();
     }
 
     public void DownloadUserData(string username, bool updateLocalJSON)

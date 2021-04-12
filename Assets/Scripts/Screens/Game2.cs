@@ -1,23 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine;
 using TMPro;
 
 public class Game2 : MonoBehaviour
 {
-
+    [Header("Pre-Game Elements")]
     [EnumFlagsAttribute]
     public DevSkillsEnum devSkills;
     public Image banner;
     public Transform developedSkillsParent;
     public TMP_Text mechanics;
     public Image userImage;
+    public GameObject preDetails;
+    public GameObject preNavigation;
+    public GameObject preNavigationReading;
+
+    [Header("Game Elements")]
+    public GameObject game3;
+    public GameObject footer;
+
+    [Header("Post-Game Elements")]
     public TMP_Text congratulationsText;
     public TMP_Text tokensEarned;
     public Button nextGameButton;
-    public GameObject preGameNavigation;
-    public GameObject preGameNavigationReading;
+    public GameObject postDetails;
+    public GameObject postParentsRewards;
+    public GameObject postNavigation;
+
     Game game;
 
     string userFirstName;
@@ -30,6 +42,54 @@ public class Game2 : MonoBehaviour
             userImage.sprite = User.instance.GetUserImage();
             userImage.color = Color.white;
         }
+    }
+
+    public void GameStart()
+    {
+        int sceneIndex = SceneUtility.GetBuildIndexByScenePath(game.title);
+
+        //scene > 0 means scene is not the login screen
+        if (sceneIndex > 0)
+        {
+            StartCoroutine(LoadGameScene(sceneIndex));
+        }
+        else
+        {
+            GameDone(true, 0);
+        }
+    }
+
+    IEnumerator LoadGameScene(int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+
+        while (!operation.isDone)
+        {
+            yield return null;
+        }
+
+        GameController controller = GameObject.FindObjectOfType<GameController>();
+        controller.isGameDone.AddListener(delegate { GameDone(false, sceneIndex); });
+
+        game3.SetActive(true);
+        footer.SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
+    public void GameDone(bool isSceneEmpty, int sceneIndex)
+    {
+        this.gameObject.SetActive(true);
+
+        GameObject[] preGame = { preDetails, preNavigation, preNavigationReading, game3 };
+        foreach (GameObject gObject in preGame)
+            gObject.SetActive(false);
+
+        GameObject[] postGame = { postDetails, postParentsRewards, postNavigation, footer };
+        foreach (GameObject gObject in postGame)
+            gObject.SetActive(true);
+
+        if (!isSceneEmpty)
+            SceneManager.UnloadSceneAsync(sceneIndex);
     }
 
     public void SetGame2Screen(Game game)
@@ -53,8 +113,8 @@ public class Game2 : MonoBehaviour
         congratulationsText.text = "CONGRATULATIONS " + userFirstName + " YOU WON " + game.title + "!";
         tokensEarned.text = "YOU JUST EARNED\n<color=#ff8426>" + "+" + game.tokensToEarn.ToString() + " TOKENS</color>";
 
-        preGameNavigation.SetActive(!game.readingGame);
-        preGameNavigationReading.SetActive(game.readingGame);
+        preNavigation.SetActive(!game.readingGame);
+        preNavigationReading.SetActive(game.readingGame);
 
         PopulateDevelopmentSkills();
         StartCoroutine(RefreshLayout());
@@ -62,8 +122,8 @@ public class Game2 : MonoBehaviour
 
     public void ResetGame2Screen()
     {
-        preGameNavigation.SetActive(!game.readingGame);
-        preGameNavigationReading.SetActive(game.readingGame);
+        preNavigation.SetActive(!game.readingGame);
+        preNavigationReading.SetActive(game.readingGame);
     }
 
     public void RefreshLayoutBtn()

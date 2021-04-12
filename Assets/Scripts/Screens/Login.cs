@@ -54,6 +54,8 @@ public class Login : MonoBehaviour
                     _userData.lastName = "User";
                     _userData.emailAddress = "testUser@email.com";
                     _userData.parentsEmail = "testUserParent@email.com";
+                    _userData.username = "testUser";
+                    _userData.password = "password";
                     _userData.tokens = 101;
                     _userData.tokensEarned = 202;
                     _userData.skillsPlayed = new List<KeyCount>();

@@ -46,7 +46,7 @@ public class UserData
 
     public IEnumerator DownloadUserData(System.Action<UserData> callback = null)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/users/" + this.username))
+        using (UnityWebRequest request = UnityWebRequest.Get("http://unitytestnode.herokuapp.com/users/" + this.username))
         {
             yield return request.SendWebRequest();
 
@@ -72,7 +72,7 @@ public class UserData
     {
         timeStamp = System.DateTime.Now.ToString();
 
-        string webhook = login ? "http://localhost:3000/users/login" : "http://localhost:3000/users";
+        string webhook = login ? "http://unitytestnode.herokuapp.com/users/login" : "http://unitytestnode.herokuapp.com/users";
         using (UnityWebRequest request = new UnityWebRequest(webhook, "POST"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
@@ -151,7 +151,7 @@ public class UserData
     {
         timeStamp = System.DateTime.Now.ToString();
 
-        using (UnityWebRequest request = new UnityWebRequest("http://localhost:3000/users/" + this.username, "PUT"))
+        using (UnityWebRequest request = new UnityWebRequest("http://unitytestnode.herokuapp.com/users/" + this.username, "PUT"))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             byte[] bodyRaw = Encoding.UTF8.GetBytes(this.Stringify());

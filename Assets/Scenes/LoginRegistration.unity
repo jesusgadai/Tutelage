@@ -9314,7 +9314,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  testBuild: 0
+  testBuild: 1
   testBuildBanner: {fileID: 1196780608}
 --- !u!1 &983063791
 GameObject:

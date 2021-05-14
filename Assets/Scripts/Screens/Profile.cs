@@ -7,8 +7,13 @@ using TMPro;
 public class Profile : MonoBehaviour
 {
     public TMP_Text firstLastName;
-    public TMP_Text gamesPlayed;
-    public TMP_Text tokens;
+    public TMP_Text username;
+    public TMP_Text age;
+    public TMP_Text dateOfBirth;
+    public TMP_Text contactNumber;
+    public TMP_Text emailAddress;
+    public TMP_Text parentsEmail;
+    public TMP_Text language;
     public Image userImage;
 
     void OnEnable()
@@ -17,17 +22,16 @@ public class Profile : MonoBehaviour
         {
             User user = User.instance;
             firstLastName.text = user.GetFullName().Equals("") ? "Blank User" : user.GetFullName();
-            gamesPlayed.text = user.GetTotalGamesPlayed().ToString();
-            tokens.text = user.GetTokens().ToString();
+            username.text = user.GetUserName();
+            age.text = user.GetAge().ToString();
+            dateOfBirth.text = user.GetDateOfBirth();
+            contactNumber.text = user.GetContactNumber();
+            emailAddress.text = user.GetEmailAddress();
+            parentsEmail.text = user.GetParentsEmail();
+            language.text = user.GetLanguage();
+
             userImage.sprite = user.GetUserImage();
             userImage.color = Color.white;
         }
-    }
-
-    public void LogOut()
-    {
-        User.instance.LogOut();
-        Destroy(User.instance.gameObject);
-        GetComponent<SceneController>().LoadScene(1);
     }
 }

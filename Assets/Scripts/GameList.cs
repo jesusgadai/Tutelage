@@ -11,7 +11,7 @@ public class GameList : MonoBehaviour
     public Button play;
     public Transform developmentSkillsParent;
 
-    public Game2 game2Screen;
+    public GameIntroResult gameIntroResult;
 
     Game game;
 
@@ -23,7 +23,7 @@ public class GameList : MonoBehaviour
 
         play.onClick.AddListener(() =>
         {
-            game2Screen.SetGame2Screen(game);
+            gameIntroResult.SetGame2Screen(game);
         });
 
         PopulateDevelopmentSkills();

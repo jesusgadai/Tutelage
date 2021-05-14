@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class Game2 : MonoBehaviour
+public class GameIntroResult : MonoBehaviour
 {
     [Header("Pre-Game Elements")]
     [EnumFlagsAttribute]

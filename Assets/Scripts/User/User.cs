@@ -155,9 +155,52 @@ public class User : MonoBehaviour
         return _userData.firstName + " " + _userData.lastName;
     }
 
+    public string GetUserName()
+    {
+        return _userData.username;
+    }
+
+    public int GetAge()
+    {
+        System.DateTime now = System.DateTime.Now;
+        System.DateTime dateOfBirth = System.DateTime.Parse(_userData.dateOfBirth);
+
+        int a = (now.Year * 100 + now.Month) * 100 + now.Day;
+        int b = (dateOfBirth.Year * 100 + dateOfBirth.Month) * 100 + dateOfBirth.Day;
+
+        return (a - b) / 10000;
+    }
+
+    public string GetDateOfBirth()
+    {
+        System.DateTime dateOfBirth = System.DateTime.Parse(_userData.dateOfBirth);
+
+        return dateOfBirth.ToString("MMMM dd, yyyy");
+    }
+
     public Sprite GetUserImage()
     {
         return _localData.playerImage;
+    }
+
+    public string GetContactNumber()
+    {
+        return _userData.contactnumber;
+    }
+
+    public string GetEmailAddress()
+    {
+        return _userData.emailAddress;
+    }
+
+    public string GetParentsEmail()
+    {
+        return _userData.parentsEmail;
+    }
+
+    public string GetLanguage()
+    {
+        return _userData.language;
     }
 
     public int GetTotalGamesPlayed()

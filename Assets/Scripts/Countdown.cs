@@ -14,30 +14,39 @@ public class Countdown : MonoBehaviour
     public UnityEvent onCountdownComplete;
 
     bool isCounting = false;
+    float timeLimit;
 
-    void Awake() {
+    void OnEnable()
+    {
+        timeLimit = timeLimitSeconds;
         isCounting = true;
         pauseButton.onClick.AddListener(StopStart);
     }
 
     void Update()
     {
-        if(isCounting)
+        if (isCounting)
         {
-            timeLimitSeconds -= Time.deltaTime;
+            timeLimit -= Time.deltaTime;
 
-            if(timeLimitSeconds <= 0)
+            if (timeLimit <= 0)
             {
-                timeLimitSeconds = 0;
+                timeLimit = 0;
                 isCounting = false;
 
-                if(onCountdownComplete !=  null)
-                onCountdownComplete.Invoke();
+                if (onCountdownComplete != null)
+                    onCountdownComplete.Invoke();
             }
 
-            if(timeValueText != null)
-                timeValueText.text = Mathf.Floor(timeLimitSeconds / 60).ToString("00") + ":" + Mathf.Floor(timeLimitSeconds % 60).ToString("00");
+            if (timeValueText != null)
+                timeValueText.text = Mathf.Floor(timeLimit / 60).ToString("00") + ":" + Mathf.Floor(timeLimit % 60).ToString("00");
         }
+    }
+
+    void OnDisable()
+    {
+        isCounting = false;
+        gameObject.SetActive(false);
     }
 
     public void StopStart()

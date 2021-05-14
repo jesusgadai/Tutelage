@@ -5,6 +5,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
+#pragma warning disable 612, 618
+
 [System.Serializable]
 public class UserData
 {

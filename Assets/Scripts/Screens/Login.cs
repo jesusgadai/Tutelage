@@ -39,7 +39,7 @@ public class Login : MonoBehaviour
     {
         StartCoroutine(_user.UploadData(true, stayLoggedInValue, result =>
         {
-            Debug.Log(result);
+            Debug.Log(result ? "Login successful" : "Login failed");
             if (result || testBuild)
             {
                 if (!testBuild && User.instance != null)

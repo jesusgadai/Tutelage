@@ -12,6 +12,7 @@ public class GameIntroResult : MonoBehaviour
     public DevSkillsEnum devSkills;
     public Image banner;
     public Transform developedSkillsParent;
+    public GameObject mechanicsHeader;
     public TMP_Text mechanics;
     public Image userImage;
     public GameObject preDetails;
@@ -27,7 +28,6 @@ public class GameIntroResult : MonoBehaviour
     public TMP_Text tokensEarned;
     public Button nextGameButton;
     public GameObject postDetails;
-    public GameObject postParentsRewards;
     public GameObject postNavigation;
 
     Game game;
@@ -84,30 +84,22 @@ public class GameIntroResult : MonoBehaviour
         foreach (GameObject gObject in preGame)
             gObject.SetActive(false);
 
-        GameObject[] postGame = { postDetails, postParentsRewards, postNavigation, footer };
+        GameObject[] postGame = { postDetails, postNavigation, footer };
         foreach (GameObject gObject in postGame)
             gObject.SetActive(true);
 
         if (!isSceneEmpty)
             SceneManager.UnloadSceneAsync(sceneIndex);
+
+        RefreshLayoutBtn();
     }
 
     public void SetGame2Screen(Game game)
     {
         this.game = game;
-        if (game.nextGame == null)
-        {
-            nextGameButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            nextGameButton.gameObject.SetActive(true);
-            nextGameButton.onClick.AddListener(() =>
-            {
-                SetGame2Screen(game.nextGame);
-            });
-        }
+
         banner.sprite = game.banner;
+        mechanicsHeader.SetActive(game.mechanics.Equals("") ? false : true);
         mechanics.text = game.mechanics;
         devSkills = game.devSkills;
         congratulationsText.text = "CONGRATULATIONS " + userFirstName + " YOU WON " + game.title + "!";

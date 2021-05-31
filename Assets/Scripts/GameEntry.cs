@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,22 +12,21 @@ public class GameEntry : MonoBehaviour
     public GameObject lockOverlay;
     public GameObject playButton;
     public GameObject unlockButton;
+    public GameIntroResult gameIntroResult;
 
-    public GameCategoryScreen categoryScreen;
-
-    MiniGame miniGame;
-    public void Set(MiniGame miniGame)
+    GameEntryData gameEntryData;
+    public void Set(GameEntryData gameEntryData)
     {
-        this.miniGame = miniGame;
-        this.title.text = miniGame.title;
-        this.price.text = "<color=#6A6A6A>TOKEN</color> <color=#FFD426>" + miniGame.price.ToString() + "</color>";
-        image.sprite = miniGame.image;
+        this.gameEntryData = gameEntryData;
+        this.title.text = gameEntryData.title;
+        this.price.text = "<color=#6A6A6A>TOKEN</color> <color=#FFD426>" + gameEntryData.price.ToString() + "</color>";
+        image.sprite = gameEntryData.image;
 
-        Lock(miniGame.status == Status.LOCKED);
+        Lock(gameEntryData.status == Status.LOCKED);
 
         playButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            categoryScreen.SetGameCategoryScreen(miniGame.gameCategory);
+            gameIntroResult.SetGame2Screen(gameEntryData.game);
         });
     }
 

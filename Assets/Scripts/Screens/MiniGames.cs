@@ -23,18 +23,18 @@ public class MiniGames : MonoBehaviour
         DestroyAllChildren(mGamesParent, true);
 
         int index = 0;
-        foreach (MiniGame miniGame in catalog.GetMiniGames())
+        foreach (GameEntryData gameEntryData in catalog.GetMiniGames())
         {
             if (index == 0)
             {
                 GameEntry firstGameEntry = mGamesParent.GetChild(0).GetComponent<GameEntry>();
-                firstGameEntry.Set(miniGame);
+                firstGameEntry.Set(gameEntryData);
                 index++;
                 continue;
             }
 
             GameEntry gameEntry = Instantiate(gameEntryPrefab, Vector3.zero, Quaternion.identity, mGamesParent).GetComponent<GameEntry>();
-            gameEntry.Set(miniGame);
+            gameEntry.Set(gameEntryData);
         }
 
         StartCoroutine(RefreshLayout());

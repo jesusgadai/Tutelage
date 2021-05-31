@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MiniGameCatalog : MonoBehaviour
 {
-    List<MiniGame> miniGames = new List<MiniGame>();
+    List<GameEntryData> gameEntryData = new List<GameEntryData>();
     List<Game> games = new List<Game>();
 
     #region Singleton
@@ -29,29 +29,11 @@ public class MiniGameCatalog : MonoBehaviour
 
     void LoadResources()
     {
-        miniGames = Resources.LoadAll<MiniGame>("Mini Games").OfType<MiniGame>().ToList();
+        gameEntryData = Resources.LoadAll<GameEntryData>("Mini Games").OfType<GameEntryData>().ToList();
 
-        foreach (MiniGame miniGame in miniGames)
+        foreach (GameEntryData gameEntry in gameEntryData)
         {
-            List<Game> gs = miniGame.gameCategory.games;
-            foreach (Game game in gs)
-            {
-                Game nextGame;
-                try
-                {
-                    nextGame = gs[gs.IndexOf(game) + 1];
-                }
-                catch
-                {
-                    nextGame = null;
-                }
-
-                game.nextGame = nextGame;
-                game.categoryIcon = miniGame.gameCategory.icon;
-                game.categoryTitle = miniGame.gameCategory.title;
-
-                games.Add(game);
-            }
+            games.Add(gameEntry.game);
         }
     }
 
@@ -59,7 +41,7 @@ public class MiniGameCatalog : MonoBehaviour
     {
         try
         {
-            return games.Find(r => r.title.Equals(gameTitle)).categoryIcon;
+            return games.Find(r => r.title.Equals(gameTitle)).icon;
         }
         catch
         {
@@ -67,8 +49,8 @@ public class MiniGameCatalog : MonoBehaviour
         }
     }
 
-    public List<MiniGame> GetMiniGames()
+    public List<GameEntryData> GetMiniGames()
     {
-        return miniGames;
+        return gameEntryData;
     }
 }

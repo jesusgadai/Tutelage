@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Mini Game", menuName = "Tutelage/Mini Game")]
-public class MiniGame : ScriptableObject
+public class GameEntryData : ScriptableObject
 {
     public string title;
     public int price;
     public Sprite image;
-    public GameCategory gameCategory;
+    public Game game;
     public Status status = Status.LOCKED;
 }
 

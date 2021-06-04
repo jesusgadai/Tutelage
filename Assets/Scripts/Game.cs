@@ -12,7 +12,6 @@ public class Game
     public Sprite smallBanner;
     [EnumFlagsAttribute]
     public DevSkillsEnum devSkills;
-    [HideInInspector]
     public Sprite icon;
     public bool readingGame;
 }

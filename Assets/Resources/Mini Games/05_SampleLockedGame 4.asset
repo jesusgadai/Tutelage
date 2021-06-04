@@ -22,6 +22,6 @@ MonoBehaviour:
     banner: {fileID: 21300000, guid: 969c6bf73b88e534795645adec5b7ca0, type: 3}
     smallBanner: {fileID: 21300000, guid: 969c6bf73b88e534795645adec5b7ca0, type: 3}
     devSkills: -1
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
     readingGame: 0
   status: 0

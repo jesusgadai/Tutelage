@@ -42,6 +42,14 @@ public class GameIntroResult : MonoBehaviour
             userImage.sprite = User.instance.GetUserImage();
             userImage.color = Color.white;
         }
+
+        GameObject[] preGame = { preDetails, preNavigation, preNavigationReading };
+        foreach (GameObject gObject in preGame)
+            gObject.SetActive(true);
+
+        GameObject[] postGame = { postDetails, postNavigation };
+        foreach (GameObject gObject in postGame)
+            gObject.SetActive(false);
     }
 
     public void GameStart()

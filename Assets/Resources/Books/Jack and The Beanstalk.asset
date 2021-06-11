@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5009c4106ea9574da455d741bc8366a, type: 3}
+  m_Name: Jack and The Beanstalk
+  m_EditorClassIdentifier: 
+  title: Jack and The Beanstalk
+  summary: Jack and The Beanstalk summary
+  story: "Once upon a time there lived a poor widow and her son Jack. One day, Jack\u2019s
+    mother told him to sell their only cow. Jack went to the market and on the way
+    he met a man who wanted to buy his cow. Jack asked, \u201CWhat will you give
+    me in return for my cow?\u201D The man answered, \u201CI will give you five magic
+    beans!\u201D Jack took the magic beans and gave the man the cow. But when he
+    reached home, Jack\u2019s mother was very angry. She said, \u201CYou fool! He
+    took away your cow and gave you some beans!\u201D She threw the beans out of
+    the window. Jack was very sad and went to sleep without dinner.  The next day,
+    when Jack woke up in the morning and looked out of the window, he saw that a
+    huge beanstalk had grown from his magic beans! He climbed up the beanstalk and
+    reached a kingdom in the sky. There lived a giant and his wife. Jack went inside
+    the house and found the giant\u2019s wife in the kitchen. Jack said, \u201CCould
+    you please give me something to eat? I am so hungry!\u201D The kind wife gave
+    him bread and some milk.  While he was eating, the giant came home. The giant
+    was very big and looked very fearsome. Jack was terrified and went and hid inside.
+    The giant cried, \u201CFee-fi-fo-fum, I smell the blood of an Englishman. Be
+    he alive, or be he dead, I\u2019ll grind his bones to make my bread!\u201D The
+    wife said, \u201CThere is no boy in here!\u201D So, the giant ate his food and
+    then went to his room. He took out his sacks of gold coins, counted them and
+    kept them aside. Then he went to sleep. In the night, Jack crept out of his hiding
+    place, took one sack of gold coins and climbed down the beanstalk. At home, he
+    gave the coins to his mother. His mother was very happy and they lived well for
+    sometime.  Jack and the Beanstalk Fee Fi Fo Fum!Climbed the beanstalk and went
+    to the giant\u2019s house again. Once again, Jack asked the giant\u2019s wife
+    for food, but while he was eating the giant returned. Jack leapt up in fright
+    and went and hid under the bed. The giant cried, \u201CFee-fifo-fum, I smell
+    the blood of an Englishman. Be he alive, or be he dead, I\u2019ll grind his bones
+    to make my bread!\u201D The wife said, \u201CThere is no boy in here!\u201D The
+    giant ate his food and went to his room. There, he took out a hen. He shouted,
+    \u201CLay!\u201D and the hen laid a golden egg. When the giant fell asleep, Jack
+    took the hen and climbed down the beanstalk. Jack\u2019s mother was very happy
+    with him.  After some days, Jack once again climbed the beanstalk and went to
+    the giant\u2019s castle. For the third time, Jack met the giant\u2019s wife and
+    asked for some food. Once again, the giant\u2019s wife gave him bread and milk.
+    But while Jack was eating, the giant came home. \u201CFee-fi-fo-fum, I smell
+    the blood of an Englishman. Be he alive, or be he dead, I\u2019ll grind his bones
+    to make my bread!\u201D cried the giant. \u201CDon\u2019t be silly! There is
+    no boy in here!\u201D said his wife.  The giant had a magical harp that could
+    play beautiful songs. While the giant slept, Jack took the harp and was about
+    to leave. Suddenly, the magic harp cried, \u201CHelp master! A boy is stealing
+    me!\u201D The giant woke up and saw Jack with the harp. Furious, he ran after
+    Jack. But Jack was too fast for him. He ran down the beanstalk and reached home.
+    The giant followed him down. Jack quickly ran inside his house and fetched an
+    axe. He began to chop the beanstalk. The giant fell and died.  Jack and his mother
+    were now very rich and they lived happily ever after."
+  cover: {fileID: 21300000, guid: 2d5fbe6f013f666498795f400a6937fa, type: 3}
+  status: 1

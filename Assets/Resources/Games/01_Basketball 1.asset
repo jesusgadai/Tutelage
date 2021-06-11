@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a60ba847977cc4893c867b90c9fe57, type: 3}
+  m_Name: 01_Basketball 1
+  m_EditorClassIdentifier: 
+  title: Basketball
+  price: 3
+  image: {fileID: 21300000, guid: 5cce2bad1def74b4e83ddc5b52114010, type: 3}
+  game:
+    title: Basketball
+    mechanics: This is a placeholder for "Basketball" since no mechanics or provided
+      for this game yet.
+    tokensToEarn: 5
+    banner: {fileID: 21300000, guid: 969c6bf73b88e534795645adec5b7ca0, type: 3}
+    smallBanner: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
+    devSkills: -1
+    icon: {fileID: 21300000, guid: da4c79d007c766148bf91a28058f22c2, type: 3}
+    readingGame: 0
+  status: 1

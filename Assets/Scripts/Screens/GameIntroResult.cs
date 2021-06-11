@@ -17,7 +17,6 @@ public class GameIntroResult : MonoBehaviour
     public Image userImage;
     public GameObject preDetails;
     public GameObject preNavigation;
-    public GameObject preNavigationReading;
 
     [Header("Game Elements")]
     public GameObject game3;
@@ -26,7 +25,6 @@ public class GameIntroResult : MonoBehaviour
     [Header("Post-Game Elements")]
     public TMP_Text congratulationsText;
     public TMP_Text tokensEarned;
-    public Button nextGameButton;
     public GameObject postDetails;
     public GameObject postNavigation;
 
@@ -43,7 +41,7 @@ public class GameIntroResult : MonoBehaviour
             userImage.color = Color.white;
         }
 
-        GameObject[] preGame = { preDetails, preNavigation, preNavigationReading };
+        GameObject[] preGame = { preDetails, preNavigation };
         foreach (GameObject gObject in preGame)
             gObject.SetActive(true);
 
@@ -88,7 +86,7 @@ public class GameIntroResult : MonoBehaviour
     {
         this.gameObject.SetActive(true);
 
-        GameObject[] preGame = { preDetails, preNavigation, preNavigationReading, game3 };
+        GameObject[] preGame = { preDetails, preNavigation, game3 };
         foreach (GameObject gObject in preGame)
             gObject.SetActive(false);
 
@@ -114,7 +112,6 @@ public class GameIntroResult : MonoBehaviour
         tokensEarned.text = "YOU JUST EARNED\n<color=#ff8426>" + "+" + game.tokensToEarn.ToString() + " TOKENS</color>";
 
         preNavigation.SetActive(!game.readingGame);
-        preNavigationReading.SetActive(game.readingGame);
 
         PopulateDevelopmentSkills();
         StartCoroutine(RefreshLayout());
@@ -123,7 +120,6 @@ public class GameIntroResult : MonoBehaviour
     public void ResetGame2Screen()
     {
         preNavigation.SetActive(!game.readingGame);
-        preNavigationReading.SetActive(game.readingGame);
     }
 
     public void RefreshLayoutBtn()

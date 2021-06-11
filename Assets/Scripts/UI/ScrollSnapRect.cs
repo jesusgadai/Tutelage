@@ -13,6 +13,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     [Tooltip("Set starting page index - starting from 0")]
     public int startingPage = 0;
+    public int _currentPage;
     [Tooltip("Threshold time for fast swipe in seconds")]
     public float fastSwipeThresholdTime = 0.3f;
     [Tooltip("Threshold time for fast swipe in (unscaled) pixels")]
@@ -30,10 +31,10 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     [Tooltip("Container with page images (optional)")]
     public Transform pageSelectionIcons;
     public UnityEvent onCarouselFinish;
+    public bool loop;
 
     // fast swipes should be fast and short. If too long, then it is not fast swipe
     private int _fastSwipeThresholdMaxLimit;
-
     private ScrollRect _scrollRectComponent;
     private RectTransform _scrollRectRect;
     private RectTransform _container;
@@ -42,7 +43,7 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
 
     // number of pages in container
     private int _pageCount;
-    private int _currentPage;
+
 
     // whether lerping is in progress and target lerp position
     private bool _lerp;
@@ -196,16 +197,35 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
     private void LerpToPage(int aPageIndex)
     {
         aPageIndex = Mathf.Clamp(aPageIndex, 0, _pageCount);
-        if (aPageIndex < _pageCount)
+        if (!loop)
         {
-            _lerpTo = _pagePositions[aPageIndex];
-            _lerp = true;
-            _currentPage = aPageIndex;
+            if (aPageIndex < _pageCount)
+            {
+                _lerpTo = _pagePositions[aPageIndex];
+                _lerp = true;
+                _currentPage = aPageIndex;
+            }
+            else
+            {
+                if (onCarouselFinish != null)
+                    onCarouselFinish.Invoke();
+            }
         }
         else
         {
-            if (onCarouselFinish != null)
-                onCarouselFinish.Invoke();
+            if (aPageIndex < _pageCount)
+            {
+                _lerpTo = _pagePositions[aPageIndex];
+                _lerp = true;
+                _currentPage = aPageIndex;
+            }
+            else
+            {
+                aPageIndex = 0;
+                _lerpTo = _pagePositions[aPageIndex];
+                _lerp = true;
+                _currentPage = aPageIndex;
+            }
         }
     }
 

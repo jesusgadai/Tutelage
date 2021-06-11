@@ -49,7 +49,7 @@ public class DevelopmentStats : MonoBehaviour
             else
             {
                 DevelopmentGameList devGameList = newListPair.GetComponent<DevelopmentGameList>();
-                Sprite icon = MiniGameCatalog.instance.FindIcon(keyCount.name);
+                Sprite icon = GameCatalog.instance.FindIcon(keyCount.name);
                 devGameList.SetGameList(icon, keyCount.name, keyCount.count);
             }
         }

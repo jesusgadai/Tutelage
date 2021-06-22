@@ -84,6 +84,8 @@ public class GameIntroResult : MonoBehaviour
 
     public void GameDone(bool isSceneEmpty, int sceneIndex)
     {
+        ProcessWin();
+
         this.gameObject.SetActive(true);
 
         GameObject[] preGame = { preDetails, preNavigation, game3 };
@@ -127,7 +129,7 @@ public class GameIntroResult : MonoBehaviour
         StartCoroutine(RefreshLayout());
     }
 
-    public void TestWin()
+    public void ProcessWin()
     {
         if (User.instance != null)
         {

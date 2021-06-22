@@ -6,12 +6,11 @@ using TMPro;
 public class PinballController : GameController
 {
     public TMP_Text scoreValueText;
-    public TMP_Text timeValueText;
+    public TMP_Text livesCountText;
     public Plunger plunger;
     public Hole hole;
-    public float timeLimitSeconds = 300;
+    public int lives = 3;
 
-    bool gameRunning;
     int multiplier = 1;
     int score = 0;
 
@@ -24,28 +23,9 @@ public class PinballController : GameController
         SetupMultipliers(multiplierPads);
 
         hole.onBalLFell.AddListener(plunger.ResetBall);
+        hole.onBalLFell.AddListener(SubtractLife);
 
-        gameRunning = true;
-    }
-
-    void Update()
-    {
-        if (gameRunning)
-        {
-            timeLimitSeconds -= Time.deltaTime;
-
-            if (timeLimitSeconds <= 0)
-            {
-                timeLimitSeconds = 0;
-                gameRunning = false;
-            }
-
-            timeValueText.text = Mathf.Floor(timeLimitSeconds / 60).ToString("00") + ":" + Mathf.Floor(timeLimitSeconds % 60).ToString("00");
-        }
-        else
-        {
-            GameDone();
-        }
+        livesCountText.text = lives.ToString("00000");
     }
 
     void SetupBumpers(BumperHit[] bumpers)
@@ -62,6 +42,17 @@ public class PinballController : GameController
         {
             multiplierPad.onTriggerEnter.AddListener(delegate { AddMultiplier(multiplierPad.multiplierValue); });
             multiplierPad.onMultiplierExpire.AddListener(delegate { SubtractMultiplier(multiplierPad.multiplierValue); });
+        }
+    }
+
+    void SubtractLife()
+    {
+        lives--;
+        livesCountText.text = lives.ToString("00000");
+
+        if (lives <= 0)
+        {
+            GameDone();
         }
     }
 
